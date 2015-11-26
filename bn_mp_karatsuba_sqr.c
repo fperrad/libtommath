@@ -33,7 +33,7 @@ int mp_karatsuba_sqr (mp_int * a, mp_int * b)
   B = a->used;
 
   /* now divide in two */
-  B = B >> 1;
+  B = B / 2;
 
   /* init copy all the temps */
   if (mp_init_size (&x0, B) != MP_OKAY)

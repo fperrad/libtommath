@@ -66,7 +66,7 @@ int fast_s_mp_sqr (mp_int * a, mp_int * b)
        * we halve the distance since they approach at a rate of 2x
        * and we have to round because odd cases need to be executed
        */
-      iy = MIN(iy, ((ty-tx)+1)>>1);
+      iy = MIN(iy, ((ty-tx)+1)/2);
 
       /* execute loop */
       for (iz = 0; iz < iy; iz++) {
@@ -78,7 +78,7 @@ int fast_s_mp_sqr (mp_int * a, mp_int * b)
 
       /* even columns have the square term in them */
       if (((unsigned)ix & 1u) == 0u) {
-         _W += (mp_word)a->dp[ix>>1] * (mp_word)a->dp[ix>>1];
+         _W += (mp_word)a->dp[ix/2] * (mp_word)a->dp[ix/2];
       }
 
       /* store it */

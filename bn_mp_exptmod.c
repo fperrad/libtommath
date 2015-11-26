@@ -83,7 +83,7 @@ int mp_exptmod (mp_int * G, mp_int * X, mp_int * P, mp_int * Y)
 #ifdef BN_MP_REDUCE_IS_2K_C
   /* if not, is it a unrestricted DR modulus? */
   if (dr == 0) {
-     dr = mp_reduce_is_2k(P) << 1;
+     dr = mp_reduce_is_2k(P) * 2;
   }
 #endif
     
