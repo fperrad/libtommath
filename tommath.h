@@ -28,9 +28,9 @@ extern "C" {
 
 /* detect 64-bit mode if possible */
 #if defined(__x86_64__)
-   #if !(defined(MP_32BIT) || defined(MP_16BIT) || defined(MP_8BIT))
-      #define MP_64BIT
-   #endif
+#   if !(defined(MP_32BIT) || defined(MP_16BIT) || defined(MP_8BIT))
+#      define MP_64BIT
+#   endif
 #endif
 
 /* some default configurations.
@@ -44,61 +44,61 @@ extern "C" {
 #ifdef MP_8BIT
    typedef uint8_t              mp_digit;
    typedef uint16_t             mp_word;
-#define MP_SIZEOF_MP_DIGIT      1
-#ifdef DIGIT_BIT
-#error You must not define DIGIT_BIT when using MP_8BIT
-#endif
+#   define MP_SIZEOF_MP_DIGIT 1
+#   ifdef DIGIT_BIT
+#      error You must not define DIGIT_BIT when using MP_8BIT
+#   endif
 #elif defined(MP_16BIT)
    typedef uint16_t             mp_digit;
    typedef uint32_t             mp_word;
-#define MP_SIZEOF_MP_DIGIT      2
-#ifdef DIGIT_BIT
-#error You must not define DIGIT_BIT when using MP_16BIT
-#endif
+#   define MP_SIZEOF_MP_DIGIT 2
+#   ifdef DIGIT_BIT
+#      error You must not define DIGIT_BIT when using MP_16BIT
+#   endif
 #elif defined(MP_64BIT)
    /* for GCC only on supported platforms */
-#ifndef CRYPT
+#   ifndef CRYPT
    typedef unsigned long long   ulong64;
    typedef signed long long     long64;
-#endif
+#   endif
 
    typedef uint64_t mp_digit;
-#if defined(_WIN32)
+#   if defined(_WIN32)
    typedef unsigned __int128    mp_word;
-#elif defined(__GNUC__)
+#   elif defined(__GNUC__)
    typedef unsigned long        mp_word __attribute__ ((mode(TI)));
-#else
+#   else
    /* it seems you have a problem
     * but we assume you can somewhere define your own uint128_t */
    typedef uint128_t            mp_word;
-#endif
+#   endif
 
-   #define DIGIT_BIT            60
+#   define DIGIT_BIT 60
 #else
    /* this is the default case, 28-bit digits */
 
    /* this is to make porting into LibTomCrypt easier :-) */
-#ifndef CRYPT
+#   ifndef CRYPT
    typedef unsigned long long   ulong64;
    typedef signed long long     long64;
-#endif
+#   endif
 
    typedef uint32_t             mp_digit;
    typedef uint64_t             mp_word;
 
-#ifdef MP_31BIT
+#   ifdef MP_31BIT
    /* this is an extension that uses 31-bit digits */
-   #define DIGIT_BIT            31
-#else
+#      define DIGIT_BIT 31
+#   else
    /* default case is 28-bit digits, defines MP_28BIT as a handy macro to test */
-   #define DIGIT_BIT            28
-   #define MP_28BIT
-#endif
+#      define DIGIT_BIT 28
+#      define MP_28BIT
+#   endif
 #endif
 
 /* otherwise the bits per digit is calculated automatically from the size of a mp_digit */
 #ifndef DIGIT_BIT
-   #define DIGIT_BIT     (((CHAR_BIT * MP_SIZEOF_MP_DIGIT) - 1))  /* bits per digit */
+#   define DIGIT_BIT (((CHAR_BIT * MP_SIZEOF_MP_DIGIT) - 1))  /* bits per digit */
    typedef uint_least32_t mp_min_u32;
 #else
    typedef mp_digit mp_min_u32;
@@ -106,14 +106,14 @@ extern "C" {
 
 /* platforms that can use a better rand function */
 #if defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__DragonFly__)
-    #define MP_USE_ALT_RAND 1
+#   define MP_USE_ALT_RAND 1
 #endif
 
 /* use arc4random on platforms that support it */
 #ifdef MP_USE_ALT_RAND
-    #define MP_GEN_RANDOM()    arc4random()
+#   define MP_GEN_RANDOM() arc4random()
 #else
-    #define MP_GEN_RANDOM()    rand()
+#   define MP_GEN_RANDOM() rand()
 #endif
 
 #define MP_DIGIT_BIT     DIGIT_BIT
@@ -154,11 +154,11 @@ extern int KARATSUBA_MUL_CUTOFF,
 
 /* default precision */
 #ifndef MP_PREC
-   #ifndef MP_LOW_MEM
-      #define MP_PREC                 32     /* default digits of precision */
-   #else
-      #define MP_PREC                 8      /* default digits of precision */
-   #endif
+#   ifndef MP_LOW_MEM
+#      define MP_PREC 32        /* default digits of precision */
+#   else
+#      define MP_PREC 8         /* default digits of precision */
+#   endif
 #endif
 
 /* size of comba arrays, should be at least 2 * 2**(BITS_PER_WORD - BITS_PER_DIGIT*2) */
@@ -460,9 +460,9 @@ int mp_exptmod(mp_int *a, mp_int *b, mp_int *c, mp_int *d);
 
 /* number of primes */
 #ifdef MP_8BIT
-   #define PRIME_SIZE      31
+#  define PRIME_SIZE 31
 #else
-   #define PRIME_SIZE      256
+#  define PRIME_SIZE 256
 #endif
 
 /* table of first PRIME_SIZE primes */
