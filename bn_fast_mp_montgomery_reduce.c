@@ -23,7 +23,7 @@
  *
  * Based on Algorithm 14.32 on pp.601 of HAC.
 */
-int fast_mp_montgomery_reduce (mp_int * x, mp_int * n, mp_digit rho)
+int fast_mp_montgomery_reduce(mp_int *x, mp_int *n, mp_digit rho)
 {
   int     ix, res, olduse;
   mp_word W[MP_WARRAY];
@@ -161,7 +161,7 @@ int fast_mp_montgomery_reduce (mp_int * x, mp_int * n, mp_digit rho)
 
   /* if A >= m then A = A - m */
   if (mp_cmp_mag(x, n) != MP_LT) {
-    return s_mp_sub (x, n, x);
+    return s_mp_sub(x, n, x);
   }
   return MP_OKAY;
 }

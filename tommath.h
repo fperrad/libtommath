@@ -228,19 +228,19 @@ int mp_set_long(mp_int *a, unsigned long b);
 int mp_set_long_long(mp_int *a, unsigned long long b);
 
 /* get a 32-bit value */
-unsigned long mp_get_int(mp_int * a);
+unsigned long mp_get_int(mp_int *a);
 
 /* get a platform dependent unsigned long value */
-unsigned long mp_get_long(mp_int * a);
+unsigned long mp_get_long(mp_int *a);
 
 /* get a platform dependent unsigned long long value */
-unsigned long long mp_get_long_long(mp_int * a);
+unsigned long long mp_get_long_long(mp_int *a);
 
 /* initialize and set a digit */
-int mp_init_set (mp_int * a, mp_digit b);
+int mp_init_set(mp_int *a, mp_digit b);
 
 /* initialize and set 32-bit value */
-int mp_init_set_int (mp_int * a, unsigned long b);
+int mp_init_set_int(mp_int *a, unsigned long b);
 
 /* copy, b = a */
 int mp_copy(mp_int *a, mp_int *b);
@@ -252,10 +252,10 @@ int mp_init_copy(mp_int *a, mp_int *b);
 void mp_clamp(mp_int *a);
 
 /* import binary data */
-int mp_import(mp_int* rop, size_t count, int order, size_t size, int endian, size_t nails, const void* op);
+int mp_import(mp_int *rop, size_t count, int order, size_t size, int endian, size_t nails, const void *op);
 
 /* export binary data */
-int mp_export(void* rop, size_t* countp, int order, size_t size, int endian, size_t nails, mp_int* op);
+int mp_export(void *rop, size_t *countp, int order, size_t size, int endian, size_t nails, mp_int *op);
 
 /* ---> digit manipulation <--- */
 
@@ -355,7 +355,7 @@ int mp_div_3(mp_int *a, mp_int *c, mp_digit *d);
 
 /* c = a**b */
 int mp_expt_d(mp_int *a, mp_digit b, mp_int *c);
-int mp_expt_d_ex (mp_int * a, mp_digit b, mp_int * c, int fast);
+int mp_expt_d_ex(mp_int *a, mp_digit b, mp_int *c, int fast);
 
 /* c = a mod b, 0 <= c < b  */
 int mp_mod_d(mp_int *a, mp_digit b, mp_digit *c);
@@ -391,7 +391,7 @@ int mp_lcm(mp_int *a, mp_int *b, mp_int *c);
  * returns error if a < 0 and b is even
  */
 int mp_n_root(mp_int *a, mp_digit b, mp_int *c);
-int mp_n_root_ex (mp_int * a, mp_digit b, mp_int * c, int fast);
+int mp_n_root_ex(mp_int *a, mp_digit b, mp_int *c, int fast);
 
 /* special sqrt algo */
 int mp_sqrt(mp_int *arg, mp_int *ret);
@@ -534,16 +534,16 @@ int mp_count_bits(mp_int *a);
 int mp_unsigned_bin_size(mp_int *a);
 int mp_read_unsigned_bin(mp_int *a, const unsigned char *b, int c);
 int mp_to_unsigned_bin(mp_int *a, unsigned char *b);
-int mp_to_unsigned_bin_n (mp_int * a, unsigned char *b, unsigned long *outlen);
+int mp_to_unsigned_bin_n(mp_int *a, unsigned char *b, unsigned long *outlen);
 
 int mp_signed_bin_size(mp_int *a);
 int mp_read_signed_bin(mp_int *a, const unsigned char *b, int c);
 int mp_to_signed_bin(mp_int *a,  unsigned char *b);
-int mp_to_signed_bin_n (mp_int * a, unsigned char *b, unsigned long *outlen);
+int mp_to_signed_bin_n(mp_int *a, unsigned char *b, unsigned long *outlen);
 
 int mp_read_radix(mp_int *a, const char *str, int radix);
 int mp_toradix(mp_int *a, char *str, int radix);
-int mp_toradix_n(mp_int * a, char *str, int radix, int maxlen);
+int mp_toradix_n(mp_int *a, char *str, int radix, int maxlen);
 int mp_radix_size(mp_int *a, int radix, int *size);
 
 #ifndef LTM_NO_FILE

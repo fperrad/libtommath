@@ -20,7 +20,7 @@
  * HAC is wrong here, as the special case of (0 | 1) is not
  * handled correctly.
  */
-int mp_jacobi (mp_int * a, mp_int * n, int *c)
+int mp_jacobi(mp_int *a, mp_int *n, int *c)
 {
   mp_int  a1, p1;
   int     k, s, r, res;
@@ -81,7 +81,7 @@ int mp_jacobi (mp_int * a, mp_int * n, int *c)
   }
 
   /* step 5.  if p == 3 (mod 4) *and* a1 == 3 (mod 4) then s = -s */
-  if ( ((n->dp[0] & 3u) == 3u) && ((a1.dp[0] & 3u) == 3u)) {
+  if (((n->dp[0] & 3u) == 3u) && ((a1.dp[0] & 3u) == 3u)) {
     s = -s;
   }
 

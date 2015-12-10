@@ -22,7 +22,7 @@
  *
  * Sets result to 1 if probably prime, 0 otherwise
  */
-int mp_prime_is_prime (mp_int * a, int t, int *result)
+int mp_prime_is_prime(mp_int *a, int t, int *result)
 {
   mp_int  b;
   int     ix, err, res;
@@ -54,15 +54,15 @@ int mp_prime_is_prime (mp_int * a, int t, int *result)
   }
 
   /* now perform the miller-rabin rounds */
-  if ((err = mp_init (&b)) != MP_OKAY) {
+  if ((err = mp_init(&b)) != MP_OKAY) {
     return err;
   }
 
   for (ix = 0; ix < t; ix++) {
     /* set the prime */
-    mp_set (&b, ltm_prime_tab[ix]);
+    mp_set(&b, ltm_prime_tab[ix]);
 
-    if ((err = mp_prime_miller_rabin (a, &b, &res)) != MP_OKAY) {
+    if ((err = mp_prime_miller_rabin(a, &b, &res)) != MP_OKAY) {
       goto LBL_B;
     }
 
@@ -74,7 +74,7 @@ int mp_prime_is_prime (mp_int * a, int t, int *result)
   /* passed the test */
   *result = MP_YES;
 LBL_B:
-  mp_clear (&b);
+  mp_clear(&b);
   return err;
 }
 #endif

@@ -16,7 +16,7 @@
  */
 
 /* computes xR**-1 == x (mod N) via Montgomery Reduction */
-int mp_montgomery_reduce (mp_int * x, mp_int * n, mp_digit rho)
+int mp_montgomery_reduce(mp_int *x, mp_int *n, mp_digit rho)
 {
   int     ix, res, digs;
   mp_digit mu;
@@ -30,7 +30,7 @@ int mp_montgomery_reduce (mp_int * x, mp_int * n, mp_digit rho)
   digs = (n->used * 2) + 1;
   if ((digs < (int)MP_WARRAY) &&
       (n->used <
-      (int)(1u << (((size_t)CHAR_BIT * sizeof(mp_word)) - (2u * (size_t)DIGIT_BIT))))) {
+       (int)(1u << (((size_t)CHAR_BIT * sizeof(mp_word)) - (2u * (size_t)DIGIT_BIT))))) {
     return fast_mp_montgomery_reduce(x, n, rho);
   }
 

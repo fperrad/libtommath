@@ -16,7 +16,7 @@
  */
 
 /* get the size for an unsigned equivalent */
-int mp_unsigned_bin_size (mp_int * a)
+int mp_unsigned_bin_size(mp_int *a)
 {
   int     size = mp_count_bits(a);
   return (size / 8) + ((((unsigned)size & 7u) != 0u) ? 1 : 0);

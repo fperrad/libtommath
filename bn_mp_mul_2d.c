@@ -16,7 +16,7 @@
  */
 
 /* shift left by a certain bit count */
-int mp_mul_2d (mp_int * a, int b, mp_int * c)
+int mp_mul_2d(mp_int *a, int b, mp_int *c)
 {
   mp_digit d;
   int      res;
@@ -42,7 +42,7 @@ int mp_mul_2d (mp_int * a, int b, mp_int * c)
   }
 
   /* shift any bit count < DIGIT_BIT */
-  d =  (mp_digit)b % (mp_digit)DIGIT_BIT;
+  d = (mp_digit)b % (mp_digit)DIGIT_BIT;
   if (d != 0u) {
     mp_digit *tmpc, shift, mask, r, rr;
     int x;

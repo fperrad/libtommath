@@ -16,12 +16,12 @@
  */
 
 /* shrink a bignum */
-int mp_shrink (mp_int * a)
+int mp_shrink(mp_int *a)
 {
   mp_digit *tmp;
   int used = 1;
 
-  if(a->used > 0) {
+  if (a->used > 0) {
     used = a->used;
   }
 

@@ -16,17 +16,17 @@
  */
 
 /* Greatest Common Divisor using the binary method */
-int mp_gcd (mp_int * a, mp_int * b, mp_int * c)
+int mp_gcd(mp_int *a, mp_int *b, mp_int *c)
 {
   mp_int  u, v;
   int     k, u_lsb, v_lsb, res;
 
   /* either zero than gcd is the largest */
   if (mp_iszero(a) == MP_YES) {
-    return mp_abs (b, c);
+    return mp_abs(b, c);
   }
   if (mp_iszero(b) == MP_YES) {
-    return mp_abs (a, c);
+    return mp_abs(a, c);
   }
 
   /* get copies of a and b we can modify */

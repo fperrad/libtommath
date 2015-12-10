@@ -16,12 +16,12 @@
  */
 
 /* makes a pseudo-random int of a given size */
-int mp_rand (mp_int * a, int digits)
+int mp_rand(mp_int *a, int digits)
 {
   int     res;
   mp_digit d;
 
-  mp_zero (a);
+  mp_zero(a);
   if (digits <= 0) {
     return MP_OKAY;
   }

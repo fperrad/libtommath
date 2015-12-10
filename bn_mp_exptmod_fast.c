@@ -29,7 +29,7 @@
 #   define TAB_SIZE 256
 #endif
 
-int mp_exptmod_fast (mp_int * G, mp_int * X, mp_int * P, mp_int * Y, int redmode)
+int mp_exptmod_fast(mp_int *G, mp_int *X, mp_int *P, mp_int *Y, int redmode)
 {
   mp_int  M[TAB_SIZE], res;
   mp_digit buf, mp;
@@ -39,10 +39,10 @@ int mp_exptmod_fast (mp_int * G, mp_int * X, mp_int * P, mp_int * Y, int redmode
    * one of many reduction algorithms without modding the guts of
    * the code with if statements everywhere.
    */
-  int     (*redux)(mp_int*,mp_int*,mp_digit);
+  int (*redux)(mp_int *,mp_int *,mp_digit);
 
   /* find window size */
-  x = mp_count_bits (X);
+  x = mp_count_bits(X);
   if (x <= 7) {
     winsize = 2;
   } else if (x <= 36) {
@@ -303,7 +303,7 @@ int mp_exptmod_fast (mp_int * G, mp_int * X, mp_int * P, mp_int * Y, int redmode
   }
 
   /* swap res with Y */
-  mp_exch (&res, Y);
+  mp_exch(&res, Y);
   err = MP_OKAY;
 LBL_RES:
   mp_clear(&res);

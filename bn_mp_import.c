@@ -18,8 +18,9 @@
 /* based on gmp's mpz_import.
  * see http://gmplib.org/manual/Integer-Import-and-Export.html
  */
-int mp_import(mp_int* rop, size_t count, int order, size_t size,
-                            int endian, size_t nails, const void* op) {
+int mp_import(mp_int *rop, size_t count, int order, size_t size,
+              int endian, size_t nails, const void *op)
+{
    int result;
    size_t odd_nails, nail_bytes, i, j;
    unsigned char odd_nail_mask;
@@ -45,14 +46,11 @@ int mp_import(mp_int* rop, size_t count, int order, size_t size,
 
    for (i = 0; i < count; ++i) {
       for (j = 0; j < (size - nail_bytes); ++j) {
-         unsigned char byte = *(
-               (unsigned char*)op +
-               (((order == 1) ? i : ((count - 1u) - i)) * size) +
-               ((endian == 1) ? (j + nail_bytes) : (((size - 1u) - j) - nail_bytes))
-            );
+         unsigned char byte = *((unsigned char *)op +
+                                (((order == 1) ? i : ((count - 1u) - i)) * size) +
+                                ((endian == 1) ? (j + nail_bytes) : (((size - 1u) - j) - nail_bytes)));
 
-         if (
-            (result = mp_mul_2d(rop, (j == 0u) ? (int)(8u - odd_nails) : 8, rop)) != MP_OKAY) {
+         if ((result = mp_mul_2d(rop, (j == 0u) ? (int)(8u - odd_nails) : 8, rop)) != MP_OKAY) {
             return result;
          }
 

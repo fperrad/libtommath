@@ -16,7 +16,7 @@
  */
 
 /* hac 14.61, pp608 */
-int mp_invmod_slow (mp_int * a, mp_int * b, mp_int * c)
+int mp_invmod_slow(mp_int *a, mp_int *b, mp_int *c)
 {
   mp_int  x, y, u, v, A, B, C, D;
   int     res;
@@ -53,8 +53,8 @@ int mp_invmod_slow (mp_int * a, mp_int * b, mp_int * c)
   if ((res = mp_copy(&y, &v)) != MP_OKAY) {
     goto LBL_ERR;
   }
-  mp_set (&A, (mp_digit)1);
-  mp_set (&D, (mp_digit)1);
+  mp_set(&A, (mp_digit)1);
+  mp_set(&D, (mp_digit)1);
 
 top:
   /* 4.  while u is even do */
@@ -163,7 +163,7 @@ top:
   }
 
   /* C is now the inverse */
-  mp_exch (&C, c);
+  mp_exch(&C, c);
   res = MP_OKAY;
 LBL_ERR:
   mp_clear_multi(&x, &y, &u, &v, &A, &B, &C, &D, NULL);
