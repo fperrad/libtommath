@@ -61,14 +61,14 @@ int mp_exptmod_fast(mp_int *G, mp_int *X, mp_int *P, mp_int *Y, int redmode)
 
 #ifdef MP_LOW_MEM
   if (winsize > 5) {
-     winsize = 5;
+    winsize = 5;
   }
 #endif
 
   /* init M array */
   /* init first cell */
   if ((err = mp_init(&M[1])) != MP_OKAY) {
-     return err;
+    return err;
   }
 
   /* now init the second half of the array */
@@ -85,50 +85,50 @@ int mp_exptmod_fast(mp_int *G, mp_int *X, mp_int *P, mp_int *Y, int redmode)
   /* determine and setup reduction code */
   if (redmode == 0) {
 #ifdef BN_MP_MONTGOMERY_SETUP_C
-     /* now setup montgomery  */
-     if ((err = mp_montgomery_setup(P, &mp)) != MP_OKAY) {
-        goto LBL_M;
-     }
+    /* now setup montgomery  */
+    if ((err = mp_montgomery_setup(P, &mp)) != MP_OKAY) {
+      goto LBL_M;
+    }
 #else
-     err = MP_VAL;
-     goto LBL_M;
+    err = MP_VAL;
+    goto LBL_M;
 #endif
 
-     /* automatically pick the comba one if available (saves quite a few calls/ifs) */
+    /* automatically pick the comba one if available (saves quite a few calls/ifs) */
 #ifdef BN_FAST_MP_MONTGOMERY_REDUCE_C
-     if ((((P->used * 2) + 1) < (int)MP_WARRAY) &&
-          (P->used < (1 << ((CHAR_BIT * sizeof(mp_word)) - (2 * DIGIT_BIT))))) {
-        redux = fast_mp_montgomery_reduce;
-     } else
+    if ((((P->used * 2) + 1) < (int)MP_WARRAY) &&
+        (P->used < (1 << ((CHAR_BIT * sizeof(mp_word)) - (2 * DIGIT_BIT))))) {
+      redux = fast_mp_montgomery_reduce;
+    } else
 #endif
-     {
+    {
 #ifdef BN_MP_MONTGOMERY_REDUCE_C
-        /* use slower baseline Montgomery method */
-        redux = mp_montgomery_reduce;
+      /* use slower baseline Montgomery method */
+      redux = mp_montgomery_reduce;
 #else
-        err = MP_VAL;
-        goto LBL_M;
+      err = MP_VAL;
+      goto LBL_M;
 #endif
-     }
+    }
   } else if (redmode == 1) {
 #if defined(BN_MP_DR_SETUP_C) && defined(BN_MP_DR_REDUCE_C)
-     /* setup DR reduction for moduli of the form B**k - b */
-     mp_dr_setup(P, &mp);
-     redux = mp_dr_reduce;
+    /* setup DR reduction for moduli of the form B**k - b */
+    mp_dr_setup(P, &mp);
+    redux = mp_dr_reduce;
 #else
-     err = MP_VAL;
-     goto LBL_M;
+    err = MP_VAL;
+    goto LBL_M;
 #endif
   } else {
 #if defined(BN_MP_REDUCE_2K_SETUP_C) && defined(BN_MP_REDUCE_2K_C)
-     /* setup DR reduction for moduli of the form 2**k - b */
-     if ((err = mp_reduce_2k_setup(P, &mp)) != MP_OKAY) {
-        goto LBL_M;
-     }
-     redux = mp_reduce_2k;
+    /* setup DR reduction for moduli of the form 2**k - b */
+    if ((err = mp_reduce_2k_setup(P, &mp)) != MP_OKAY) {
+      goto LBL_M;
+    }
+    redux = mp_reduce_2k;
 #else
-     err = MP_VAL;
-     goto LBL_M;
+    err = MP_VAL;
+    goto LBL_M;
 #endif
   }
 
@@ -146,24 +146,24 @@ int mp_exptmod_fast(mp_int *G, mp_int *X, mp_int *P, mp_int *Y, int redmode)
 
   if (redmode == 0) {
 #ifdef BN_MP_MONTGOMERY_CALC_NORMALIZATION_C
-     /* now we need R mod m */
-     if ((err = mp_montgomery_calc_normalization(&res, P)) != MP_OKAY) {
-       goto LBL_RES;
-     }
+    /* now we need R mod m */
+    if ((err = mp_montgomery_calc_normalization(&res, P)) != MP_OKAY) {
+      goto LBL_RES;
+    }
 #else
-     err = MP_VAL;
-     goto LBL_RES;
+    err = MP_VAL;
+    goto LBL_RES;
 #endif
 
-     /* now set M[1] to G * R mod m */
-     if ((err = mp_mulmod(G, &res, P, &M[1])) != MP_OKAY) {
-       goto LBL_RES;
-     }
+    /* now set M[1] to G * R mod m */
+    if ((err = mp_mulmod(G, &res, P, &M[1])) != MP_OKAY) {
+      goto LBL_RES;
+    }
   } else {
-     mp_set(&res, (mp_digit)1);
-     if ((err = mp_mod(G, P, &M[1])) != MP_OKAY) {
-        goto LBL_RES;
-     }
+    mp_set(&res, (mp_digit)1);
+    if ((err = mp_mod(G, P, &M[1])) != MP_OKAY) {
+      goto LBL_RES;
+    }
   }
 
   /* compute the value at M[1<<(winsize-1)] by squaring M[1] (winsize-1) times */
@@ -291,15 +291,15 @@ int mp_exptmod_fast(mp_int *G, mp_int *X, mp_int *P, mp_int *Y, int redmode)
   }
 
   if (redmode == 0) {
-     /* fixup result if Montgomery reduction is used
-      * recall that any value in a Montgomery system is
-      * actually multiplied by R mod n.  So we have
-      * to reduce one more time to cancel out the factor
-      * of R.
-      */
-     if ((err = redux(&res, P, mp)) != MP_OKAY) {
-       goto LBL_RES;
-     }
+    /* fixup result if Montgomery reduction is used
+     * recall that any value in a Montgomery system is
+     * actually multiplied by R mod n.  So we have
+     * to reduce one more time to cancel out the factor
+     * of R.
+     */
+    if ((err = redux(&res, P, mp)) != MP_OKAY) {
+      goto LBL_RES;
+    }
   }
 
   /* swap res with Y */

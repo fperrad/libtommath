@@ -20,14 +20,14 @@ int mp_montgomery_setup(mp_int *n, mp_digit *rho)
 {
   mp_digit x, b;
 
-/* fast inversion mod 2**k
- *
- * Based on the fact that
- *
- * XA = 1 (mod 2**n)  =>  (X(2-XA)) A = 1 (mod 2**2n)
- *                    =>  2*X*A - X*X*A*A = 1
- *                    =>  2*(1) - (1)     = 1
- */
+  /* fast inversion mod 2**k
+   *
+   * Based on the fact that
+   *
+   * XA = 1 (mod 2**n)  =>  (X(2-XA)) A = 1 (mod 2**2n)
+   *                    =>  2*X*A - X*X*A*A = 1
+   *                    =>  2*(1) - (1)     = 1
+   */
   b = n->dp[0];
 
   if ((b & 1u) == 0u) {

@@ -27,9 +27,9 @@ int mp_read_signed_bin(mp_int *a, const unsigned char *b, int c)
 
   /* first byte is 0 for positive, non-zero for negative */
   if (b[0] == (unsigned char)0) {
-     a->sign = MP_ZPOS;
+    a->sign = MP_ZPOS;
   } else {
-     a->sign = MP_NEG;
+    a->sign = MP_NEG;
   }
 
   return MP_OKAY;

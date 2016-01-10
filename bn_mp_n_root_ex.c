@@ -102,7 +102,7 @@ int mp_n_root_ex(mp_int *a, mp_digit b, mp_int *c, int fast)
 
     if (mp_cmp(&t2, a) == MP_GT) {
       if ((res = mp_sub_d(&t1, (mp_digit)1, &t1)) != MP_OKAY) {
-         goto LBL_T3;
+        goto LBL_T3;
       }
     } else {
       break;

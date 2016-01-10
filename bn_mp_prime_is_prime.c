@@ -37,10 +37,10 @@ int mp_prime_is_prime(mp_int *a, int t, int *result)
 
   /* is the input equal to one of the primes in the table? */
   for (ix = 0; ix < PRIME_SIZE; ix++) {
-      if (mp_cmp_d(a, ltm_prime_tab[ix]) == MP_EQ) {
-         *result = 1;
-         return MP_OKAY;
-      }
+    if (mp_cmp_d(a, ltm_prime_tab[ix]) == MP_EQ) {
+      *result = 1;
+      return MP_OKAY;
+    }
   }
 
   /* first perform trial division */

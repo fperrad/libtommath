@@ -28,7 +28,7 @@ int mp_init(mp_int *a)
 
   /* set the digits to zero */
   for (i = 0; i < MP_PREC; i++) {
-      a->dp[i] = 0;
+    a->dp[i] = 0;
   }
 
   /* set the used to zero, allocated digits to the default precision

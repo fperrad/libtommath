@@ -42,50 +42,50 @@ int fast_s_mp_sqr(mp_int *a, mp_int *b)
   /* number of output digits to produce */
   W1 = 0;
   for (ix = 0; ix < pa; ix++) {
-      int      tx, ty, iy;
-      mp_word  _W;
-      mp_digit *tmpy;
+    int      tx, ty, iy;
+    mp_word  _W;
+    mp_digit *tmpy;
 
-      /* clear counter */
-      _W = 0;
+    /* clear counter */
+    _W = 0;
 
-      /* get offsets into the two bignums */
-      ty = MIN(a->used-1, ix);
-      tx = ix - ty;
+    /* get offsets into the two bignums */
+    ty = MIN(a->used-1, ix);
+    tx = ix - ty;
 
-      /* setup temp aliases */
-      tmpx = a->dp + tx;
-      tmpy = a->dp + ty;
+    /* setup temp aliases */
+    tmpx = a->dp + tx;
+    tmpy = a->dp + ty;
 
-      /* this is the number of times the loop will iterrate, essentially
-         while (tx++ < a->used && ty-- >= 0) { ... }
-       */
-      iy = MIN(a->used-tx, ty+1);
+    /* this is the number of times the loop will iterrate, essentially
+       while (tx++ < a->used && ty-- >= 0) { ... }
+     */
+    iy = MIN(a->used-tx, ty+1);
 
-      /* now for squaring tx can never equal ty
-       * we halve the distance since they approach at a rate of 2x
-       * and we have to round because odd cases need to be executed
-       */
-      iy = MIN(iy, ((ty-tx)+1)/2);
+    /* now for squaring tx can never equal ty
+     * we halve the distance since they approach at a rate of 2x
+     * and we have to round because odd cases need to be executed
+     */
+    iy = MIN(iy, ((ty-tx)+1)/2);
 
-      /* execute loop */
-      for (iz = 0; iz < iy; iz++) {
-         _W += (mp_word)*tmpx++ * (mp_word)*tmpy--;
-      }
+    /* execute loop */
+    for (iz = 0; iz < iy; iz++) {
+      _W += (mp_word)*tmpx++ * (mp_word)*tmpy--;
+    }
 
-      /* double the inner product and add carry */
-      _W = _W + _W + W1;
+    /* double the inner product and add carry */
+    _W = _W + _W + W1;
 
-      /* even columns have the square term in them */
-      if (((unsigned)ix & 1u) == 0u) {
-         _W += (mp_word)a->dp[ix/2] * (mp_word)a->dp[ix/2];
-      }
+    /* even columns have the square term in them */
+    if (((unsigned)ix & 1u) == 0u) {
+      _W += (mp_word)a->dp[ix/2] * (mp_word)a->dp[ix/2];
+    }
 
-      /* store it */
-      W[ix] = _W & MP_MASK;
+    /* store it */
+    W[ix] = _W & MP_MASK;
 
-      /* make next carry */
-      W1 = _W >> (mp_word)DIGIT_BIT;
+    /* make next carry */
+    W1 = _W >> (mp_word)DIGIT_BIT;
   }
 
   /* setup dest */

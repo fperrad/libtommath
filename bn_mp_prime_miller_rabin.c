@@ -32,7 +32,7 @@ int mp_prime_miller_rabin(mp_int *a, mp_int *b, int *result)
 
   /* ensure b > 1 */
   if (mp_cmp_d(b, (mp_digit)1) != MP_GT) {
-     return MP_VAL;
+    return MP_VAL;
   }
 
   /* get n1 = a - 1 */
@@ -72,12 +72,12 @@ int mp_prime_miller_rabin(mp_int *a, mp_int *b, int *result)
     /* while j <= s-1 and y != n1 */
     while ((j <= (s - 1)) && (mp_cmp(&y, &n1) != MP_EQ)) {
       if ((err = mp_sqrmod(&y, a, &y)) != MP_OKAY) {
-         goto LBL_Y;
+        goto LBL_Y;
       }
 
       /* if y == 1 then composite */
       if (mp_cmp_d(&y, (mp_digit)1) == MP_EQ) {
-         goto LBL_Y;
+        goto LBL_Y;
       }
 
       ++j;

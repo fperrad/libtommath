@@ -29,12 +29,12 @@ int mp_invmod_slow(mp_int *a, mp_int *b, mp_int *c)
   /* init temps */
   if ((res = mp_init_multi(&x, &y, &u, &v,
                            &A, &B, &C, &D, NULL)) != MP_OKAY) {
-     return res;
+    return res;
   }
 
   /* x = a, y = b */
   if ((res = mp_mod(a, b, &x)) != MP_OKAY) {
-      goto LBL_ERR;
+    goto LBL_ERR;
   }
   if ((res = mp_copy(b, &y)) != MP_OKAY) {
     goto LBL_ERR;
@@ -67,10 +67,10 @@ top:
     if ((mp_isodd(&A) == MP_YES) || (mp_isodd(&B) == MP_YES)) {
       /* A = (A+y)/2, B = (B-x)/2 */
       if ((res = mp_add(&A, &y, &A)) != MP_OKAY) {
-         goto LBL_ERR;
+        goto LBL_ERR;
       }
       if ((res = mp_sub(&B, &x, &B)) != MP_OKAY) {
-         goto LBL_ERR;
+        goto LBL_ERR;
       }
     }
     /* A = A/2, B = B/2 */
@@ -92,10 +92,10 @@ top:
     if ((mp_isodd(&C) == MP_YES) || (mp_isodd(&D) == MP_YES)) {
       /* C = (C+y)/2, D = (D-x)/2 */
       if ((res = mp_add(&C, &y, &C)) != MP_OKAY) {
-         goto LBL_ERR;
+        goto LBL_ERR;
       }
       if ((res = mp_sub(&D, &x, &D)) != MP_OKAY) {
-         goto LBL_ERR;
+        goto LBL_ERR;
       }
     }
     /* C = C/2, D = D/2 */
@@ -150,16 +150,16 @@ top:
 
   /* if its too low */
   while (mp_cmp_d(&C, (mp_digit)0) == MP_LT) {
-      if ((res = mp_add(&C, b, &C)) != MP_OKAY) {
-         goto LBL_ERR;
-      }
+    if ((res = mp_add(&C, b, &C)) != MP_OKAY) {
+      goto LBL_ERR;
+    }
   }
 
   /* too big */
   while (mp_cmp_mag(&C, b) != MP_LT) {
-      if ((res = mp_sub(&C, b, &C)) != MP_OKAY) {
-         goto LBL_ERR;
-      }
+    if ((res = mp_sub(&C, b, &C)) != MP_OKAY) {
+      goto LBL_ERR;
+    }
   }
 
   /* C is now the inverse */

@@ -62,7 +62,7 @@ int mp_mul_d(mp_int *a, mp_digit b, mp_int *c)
 
   /* now zero digits above the top */
   while (ix++ < olduse) {
-     *tmpc++ = 0;
+    *tmpc++ = 0;
   }
 
   /* set used count */

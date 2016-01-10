@@ -20,7 +20,7 @@ int mp_init_set(mp_int *a, mp_digit b)
 {
   int err;
   if ((err = mp_init(a)) != MP_OKAY) {
-     return err;
+    return err;
   }
   mp_set(a, b);
   return err;

@@ -29,12 +29,12 @@ int mp_montgomery_calc_normalization(mp_int *a, mp_int *b)
   bits = mp_count_bits(b) % DIGIT_BIT;
 
   if (b->used > 1) {
-     if ((res = mp_2expt(a, ((b->used - 1) * DIGIT_BIT) + bits - 1)) != MP_OKAY) {
-        return res;
-     }
+    if ((res = mp_2expt(a, ((b->used - 1) * DIGIT_BIT) + bits - 1)) != MP_OKAY) {
+      return res;
+    }
   } else {
-     mp_set(a, (mp_digit)1);
-     bits = 1;
+    mp_set(a, (mp_digit)1);
+    bits = 1;
   }
 
 

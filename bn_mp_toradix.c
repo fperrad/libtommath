@@ -30,9 +30,9 @@ int mp_toradix(mp_int *a, char *str, int radix)
 
   /* quick out if its zero */
   if (mp_iszero(a) == MP_YES) {
-     *str++ = '0';
-     *str = '\0';
-     return MP_OKAY;
+    *str++ = '0';
+    *str = '\0';
+    return MP_OKAY;
   }
 
   if ((res = mp_init_copy(&t, a)) != MP_OKAY) {

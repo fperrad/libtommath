@@ -23,7 +23,7 @@ int mp_toom_sqr(mp_int *a, mp_int *b)
 
     /* init temps */
     if ((res = mp_init_multi(&w0, &w1, &w2, &w3, &w4, &a0, &a1, &a2, &tmp1, NULL)) != MP_OKAY) {
-       return res;
+        return res;
     }
 
     /* B */
@@ -31,78 +31,78 @@ int mp_toom_sqr(mp_int *a, mp_int *b)
 
     /* a = a2 * B**2 + a1 * B + a0 */
     if ((res = mp_mod_2d(a, DIGIT_BIT * B, &a0)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
 
     if ((res = mp_copy(a, &a1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     mp_rshd(&a1, B);
     if ((res = mp_mod_2d(&a1, DIGIT_BIT * B, &a1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
 
     if ((res = mp_copy(a, &a2)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     mp_rshd(&a2, B*2);
 
     /* w0 = a0*a0 */
     if ((res = mp_sqr(&a0, &w0)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
 
     /* w4 = a2 * a2 */
     if ((res = mp_sqr(&a2, &w4)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
 
     /* w1 = (a2 + 2(a1 + 2a0))**2 */
     if ((res = mp_mul_2(&a0, &tmp1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_add(&tmp1, &a1, &tmp1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_mul_2(&tmp1, &tmp1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_add(&tmp1, &a2, &tmp1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
 
     if ((res = mp_sqr(&tmp1, &w1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
 
     /* w3 = (a0 + 2(a1 + 2a2))**2 */
     if ((res = mp_mul_2(&a2, &tmp1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_add(&tmp1, &a1, &tmp1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_mul_2(&tmp1, &tmp1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_add(&tmp1, &a0, &tmp1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
 
     if ((res = mp_sqr(&tmp1, &w3)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
 
 
     /* w2 = (a2 + a1 + a0)**2 */
     if ((res = mp_add(&a2, &a1, &tmp1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_add(&tmp1, &a0, &tmp1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_sqr(&tmp1, &w2)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
 
     /* now solve the matrix
@@ -118,101 +118,101 @@ int mp_toom_sqr(mp_int *a, mp_int *b)
 
     /* r1 - r4 */
     if ((res = mp_sub(&w1, &w4, &w1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     /* r3 - r0 */
     if ((res = mp_sub(&w3, &w0, &w3)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     /* r1/2 */
     if ((res = mp_div_2(&w1, &w1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     /* r3/2 */
     if ((res = mp_div_2(&w3, &w3)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     /* r2 - r0 - r4 */
     if ((res = mp_sub(&w2, &w0, &w2)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_sub(&w2, &w4, &w2)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     /* r1 - r2 */
     if ((res = mp_sub(&w1, &w2, &w1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     /* r3 - r2 */
     if ((res = mp_sub(&w3, &w2, &w3)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     /* r1 - 8r0 */
     if ((res = mp_mul_2d(&w0, 3, &tmp1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_sub(&w1, &tmp1, &w1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     /* r3 - 8r4 */
     if ((res = mp_mul_2d(&w4, 3, &tmp1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_sub(&w3, &tmp1, &w3)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     /* 3r2 - r1 - r3 */
     if ((res = mp_mul_d(&w2, (mp_digit)3, &w2)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_sub(&w2, &w1, &w2)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_sub(&w2, &w3, &w2)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     /* r1 - r2 */
     if ((res = mp_sub(&w1, &w2, &w1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     /* r3 - r2 */
     if ((res = mp_sub(&w3, &w2, &w3)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     /* r1/3 */
     if ((res = mp_div_3(&w1, &w1, NULL)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     /* r3/3 */
     if ((res = mp_div_3(&w3, &w3, NULL)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
 
     /* at this point shift W[n] by B*n */
     if ((res = mp_lshd(&w1, 1*B)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_lshd(&w2, 2*B)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_lshd(&w3, 3*B)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_lshd(&w4, 4*B)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
 
     if ((res = mp_add(&w0, &w1, b)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_add(&w2, &w3, &tmp1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_add(&w4, &tmp1, &tmp1)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
     if ((res = mp_add(&tmp1, b, b)) != MP_OKAY) {
-       goto ERR;
+        goto ERR;
     }
 
 ERR:

@@ -37,17 +37,17 @@ extern "C" {
 
 /* define heap macros */
 #ifndef XMALLOC
-   /* default to libc stuff */
+/* default to libc stuff */
 #   define XMALLOC   malloc
 #   define XFREE     free
 #   define XREALLOC  realloc
 #   define XCALLOC   calloc
 #else
-   /* prototypes for our heap functions */
-   extern void *XMALLOC(size_t n);
-   extern void *XREALLOC(void *p, size_t n);
-   extern void *XCALLOC(size_t n, size_t s);
-   extern void XFREE(void *p);
+/* prototypes for our heap functions */
+extern void *XMALLOC(size_t n);
+extern void *XREALLOC(void *p, size_t n);
+extern void *XCALLOC(size_t n, size_t s);
+extern void XFREE(void *p);
 #endif
 
 /* lowlevel functions, do not call! */
@@ -108,7 +108,7 @@ int func_name (mp_int * a, type b)                       \
 }
 
 #ifdef __cplusplus
-   }
+}
 #endif
 
 #endif

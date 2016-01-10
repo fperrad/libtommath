@@ -46,15 +46,15 @@ int s_mp_exptmod(mp_int *G, mp_int *X, mp_int *P, mp_int *Y, int redmode)
   }
 
 #ifdef MP_LOW_MEM
-    if (winsize > 5) {
-       winsize = 5;
-    }
+  if (winsize > 5) {
+    winsize = 5;
+  }
 #endif
 
   /* init M array */
   /* init first cell */
   if ((err = mp_init(&M[1])) != MP_OKAY) {
-     return err;
+    return err;
   }
 
   /* now init the second half of the array */
@@ -74,15 +74,15 @@ int s_mp_exptmod(mp_int *G, mp_int *X, mp_int *P, mp_int *Y, int redmode)
   }
 
   if (redmode == 0) {
-     if ((err = mp_reduce_setup(&mu, P)) != MP_OKAY) {
-        goto LBL_MU;
-     }
-     redux = mp_reduce;
+    if ((err = mp_reduce_setup(&mu, P)) != MP_OKAY) {
+      goto LBL_MU;
+    }
+    redux = mp_reduce;
   } else {
-     if ((err = mp_reduce_2k_setup_l(P, &mu)) != MP_OKAY) {
-        goto LBL_MU;
-     }
-     redux = mp_reduce_2k_l;
+    if ((err = mp_reduce_2k_setup_l(P, &mu)) != MP_OKAY) {
+      goto LBL_MU;
+    }
+    redux = mp_reduce_2k_l;
   }
 
   /* create M table

@@ -36,7 +36,7 @@ int mp_init_size(mp_int *a, int size)
 
   /* zero the digits */
   for (x = 0; x < size; x++) {
-      a->dp[x] = 0;
+    a->dp[x] = 0;
   }
 
   return MP_OKAY;

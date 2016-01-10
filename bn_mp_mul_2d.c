@@ -23,15 +23,15 @@ int mp_mul_2d(mp_int *a, int b, mp_int *c)
 
   /* copy */
   if (a != c) {
-     if ((res = mp_copy(a, c)) != MP_OKAY) {
-       return res;
-     }
+    if ((res = mp_copy(a, c)) != MP_OKAY) {
+      return res;
+    }
   }
 
   if (c->alloc < (c->used + (b / DIGIT_BIT) + 1)) {
-     if ((res = mp_grow(c, c->used + (b / DIGIT_BIT) + 1)) != MP_OKAY) {
-       return res;
-     }
+    if ((res = mp_grow(c, c->used + (b / DIGIT_BIT) + 1)) != MP_OKAY) {
+      return res;
+    }
   }
 
   /* shift by as many digits in the bit count */
@@ -72,7 +72,7 @@ int mp_mul_2d(mp_int *a, int b, mp_int *c)
 
     /* set final carry */
     if (r != 0u) {
-       c->dp[(c->used)++] = r;
+      c->dp[(c->used)++] = r;
     }
   }
   mp_clamp(c);

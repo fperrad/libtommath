@@ -22,7 +22,7 @@ unsigned long mp_get_int(mp_int *a)
   mp_min_u32 res;
 
   if (a->used == 0) {
-     return 0;
+    return 0;
   }
 
   /* get number of digits of the lsb we have to read */

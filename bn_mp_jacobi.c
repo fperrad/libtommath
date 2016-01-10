@@ -28,18 +28,18 @@ int mp_jacobi(mp_int *a, mp_int *n, int *c)
 
   /* if n <= 0 return MP_VAL */
   if (mp_cmp_d(n, (mp_digit)0) != MP_GT) {
-     return MP_VAL;
+    return MP_VAL;
   }
 
   /* step 1. handle case of a == 0 */
   if (mp_iszero(a) == MP_YES) {
-     /* special case of a == 0 and n == 1 */
-     if (mp_cmp_d(n, (mp_digit)1) == MP_EQ) {
-       *c = 1;
-     } else {
-       *c = 0;
-     }
-     return MP_OKAY;
+    /* special case of a == 0 and n == 1 */
+    if (mp_cmp_d(n, (mp_digit)1) == MP_EQ) {
+      *c = 1;
+    } else {
+      *c = 0;
+    }
+    return MP_OKAY;
   }
 
   /* step 2.  if a == 1, return 1 */
@@ -63,7 +63,7 @@ int mp_jacobi(mp_int *a, mp_int *n, int *c)
   /* divide out larger power of two */
   k = mp_cnt_lsb(&a1);
   if ((res = mp_div_2d(&a1, k, &a1, NULL)) != MP_OKAY) {
-     goto LBL_P1;
+    goto LBL_P1;
   }
 
   /* step 4.  if e is even set s=1 */

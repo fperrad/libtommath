@@ -42,55 +42,55 @@ extern "C" {
  * [any size beyond that is ok provided it doesn't overflow the data type]
  */
 #ifdef MP_8BIT
-   typedef uint8_t              mp_digit;
-   typedef uint16_t             mp_word;
+typedef uint8_t              mp_digit;
+typedef uint16_t             mp_word;
 #   define MP_SIZEOF_MP_DIGIT 1
 #   ifdef DIGIT_BIT
 #      error You must not define DIGIT_BIT when using MP_8BIT
 #   endif
 #elif defined(MP_16BIT)
-   typedef uint16_t             mp_digit;
-   typedef uint32_t             mp_word;
+typedef uint16_t             mp_digit;
+typedef uint32_t             mp_word;
 #   define MP_SIZEOF_MP_DIGIT 2
 #   ifdef DIGIT_BIT
 #      error You must not define DIGIT_BIT when using MP_16BIT
 #   endif
 #elif defined(MP_64BIT)
-   /* for GCC only on supported platforms */
+/* for GCC only on supported platforms */
 #   ifndef CRYPT
-   typedef unsigned long long   ulong64;
-   typedef signed long long     long64;
+typedef unsigned long long   ulong64;
+typedef signed long long     long64;
 #   endif
 
-   typedef uint64_t mp_digit;
+typedef uint64_t mp_digit;
 #   if defined(_WIN32)
-   typedef unsigned __int128    mp_word;
+typedef unsigned __int128    mp_word;
 #   elif defined(__GNUC__)
-   typedef unsigned long        mp_word __attribute__ ((mode(TI)));
+typedef unsigned long        mp_word __attribute__((mode(TI)));
 #   else
-   /* it seems you have a problem
-    * but we assume you can somewhere define your own uint128_t */
-   typedef uint128_t            mp_word;
+/* it seems you have a problem
+ * but we assume you can somewhere define your own uint128_t */
+typedef uint128_t            mp_word;
 #   endif
 
 #   define DIGIT_BIT 60
 #else
-   /* this is the default case, 28-bit digits */
+/* this is the default case, 28-bit digits */
 
-   /* this is to make porting into LibTomCrypt easier :-) */
+/* this is to make porting into LibTomCrypt easier :-) */
 #   ifndef CRYPT
-   typedef unsigned long long   ulong64;
-   typedef signed long long     long64;
+typedef unsigned long long   ulong64;
+typedef signed long long     long64;
 #   endif
 
-   typedef uint32_t             mp_digit;
-   typedef uint64_t             mp_word;
+typedef uint32_t             mp_digit;
+typedef uint64_t             mp_word;
 
 #   ifdef MP_31BIT
-   /* this is an extension that uses 31-bit digits */
+/* this is an extension that uses 31-bit digits */
 #      define DIGIT_BIT 31
 #   else
-   /* default case is 28-bit digits, defines MP_28BIT as a handy macro to test */
+/* default case is 28-bit digits, defines MP_28BIT as a handy macro to test */
 #      define DIGIT_BIT 28
 #      define MP_28BIT
 #   endif
@@ -99,9 +99,9 @@ extern "C" {
 /* otherwise the bits per digit is calculated automatically from the size of a mp_digit */
 #ifndef DIGIT_BIT
 #   define DIGIT_BIT (((CHAR_BIT * MP_SIZEOF_MP_DIGIT) - 1))  /* bits per digit */
-   typedef uint_least32_t mp_min_u32;
+typedef uint_least32_t mp_min_u32;
 #else
-   typedef mp_digit mp_min_u32;
+typedef mp_digit mp_min_u32;
 #endif
 
 /* platforms that can use a better rand function */
@@ -145,9 +145,9 @@ typedef int           mp_err;
 
 /* you'll have to tune these... */
 extern int KARATSUBA_MUL_CUTOFF,
-           KARATSUBA_SQR_CUTOFF,
-           TOOM_MUL_CUTOFF,
-           TOOM_SQR_CUTOFF;
+       KARATSUBA_SQR_CUTOFF,
+       TOOM_MUL_CUTOFF,
+       TOOM_SQR_CUTOFF;
 
 /* define this to use lower memory usage routines (exptmods mostly) */
 /* #define MP_LOW_MEM */
@@ -166,8 +166,8 @@ extern int KARATSUBA_MUL_CUTOFF,
 
 /* the infamous mp_int structure */
 typedef struct  {
-    int used, alloc, sign;
-    mp_digit *dp;
+   int used, alloc, sign;
+   mp_digit *dp;
 } mp_int;
 
 /* callback for mp_prime_random, should fill dst with random bytes and return how many read [upto len] */
@@ -564,7 +564,7 @@ int mp_fwrite(mp_int *a, int radix, FILE *stream);
 #define mp_tohex(M, S)     mp_toradix((M), (S), 16)
 
 #ifdef __cplusplus
-   }
+}
 #endif
 
 #endif

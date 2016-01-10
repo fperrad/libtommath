@@ -33,7 +33,7 @@ int fast_mp_invmod(mp_int *a, mp_int *b, mp_int *c)
 
   /* init all our temps */
   if ((res = mp_init_multi(&x, &y, &u, &v, &B, &D, NULL)) != MP_OKAY) {
-     return res;
+    return res;
   }
 
   /* x == modulus, y == value to invert */

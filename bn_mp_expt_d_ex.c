@@ -62,8 +62,8 @@ int mp_expt_d_ex(mp_int *a, mp_digit b, mp_int *c, int fast)
       /* if the bit is set multiply */
       if ((b & ((mp_digit)1 << (DIGIT_BIT - 1))) != 0u) {
         if ((res = mp_mul(c, &g, c)) != MP_OKAY) {
-           mp_clear(&g);
-           return res;
+          mp_clear(&g);
+          return res;
         }
       }
 

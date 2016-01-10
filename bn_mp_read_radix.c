@@ -51,7 +51,7 @@ int mp_read_radix(mp_int *a, const char *str, int radix)
     ch = (radix <= 36) ? (char)toupper((int)*str) : *str;
     for (y = 0; y < 64; y++) {
       if (ch == mp_s_rmap[y]) {
-         break;
+        break;
       }
     }
 
@@ -61,10 +61,10 @@ int mp_read_radix(mp_int *a, const char *str, int radix)
      */
     if (y < radix) {
       if ((res = mp_mul_d(a, (mp_digit)radix, a)) != MP_OKAY) {
-         return res;
+        return res;
       }
       if ((res = mp_add_d(a, (mp_digit)y, a)) != MP_OKAY) {
-         return res;
+        return res;
       }
     } else {
       break;
@@ -74,7 +74,7 @@ int mp_read_radix(mp_int *a, const char *str, int radix)
 
   /* set the sign only if a != 0 */
   if (mp_iszero(a) != MP_YES) {
-     a->sign = neg;
+    a->sign = neg;
   }
   return MP_OKAY;
 }

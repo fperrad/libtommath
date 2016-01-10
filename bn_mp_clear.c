@@ -24,7 +24,7 @@ void mp_clear(mp_int *a)
   if (a->dp != NULL) {
     /* first zero the digits */
     for (i = 0; i < a->used; i++) {
-        a->dp[i] = 0;
+      a->dp[i] = 0;
     }
 
     /* free ram */

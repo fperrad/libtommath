@@ -37,33 +37,33 @@ int mp_exteuclid(mp_int *a, mp_int *b, mp_int *U1, mp_int *U2, mp_int *U3)
 
    /* loop while v3 != 0 */
    while (mp_iszero(&v3) == MP_NO) {
-       /* q = u3/v3 */
-       if ((err = mp_div(&u3, &v3, &q, NULL)) != MP_OKAY)                         { goto _ERR; }
+      /* q = u3/v3 */
+      if ((err = mp_div(&u3, &v3, &q, NULL)) != MP_OKAY)                          { goto _ERR; }
 
-       /* (t1,t2,t3) = (u1,u2,u3) - (v1,v2,v3)q */
-       if ((err = mp_mul(&v1, &q, &tmp)) != MP_OKAY)                              { goto _ERR; }
-       if ((err = mp_sub(&u1, &tmp, &t1)) != MP_OKAY)                             { goto _ERR; }
-       if ((err = mp_mul(&v2, &q, &tmp)) != MP_OKAY)                              { goto _ERR; }
-       if ((err = mp_sub(&u2, &tmp, &t2)) != MP_OKAY)                             { goto _ERR; }
-       if ((err = mp_mul(&v3, &q, &tmp)) != MP_OKAY)                              { goto _ERR; }
-       if ((err = mp_sub(&u3, &tmp, &t3)) != MP_OKAY)                             { goto _ERR; }
+      /* (t1,t2,t3) = (u1,u2,u3) - (v1,v2,v3)q */
+      if ((err = mp_mul(&v1, &q, &tmp)) != MP_OKAY)                               { goto _ERR; }
+      if ((err = mp_sub(&u1, &tmp, &t1)) != MP_OKAY)                              { goto _ERR; }
+      if ((err = mp_mul(&v2, &q, &tmp)) != MP_OKAY)                               { goto _ERR; }
+      if ((err = mp_sub(&u2, &tmp, &t2)) != MP_OKAY)                              { goto _ERR; }
+      if ((err = mp_mul(&v3, &q, &tmp)) != MP_OKAY)                               { goto _ERR; }
+      if ((err = mp_sub(&u3, &tmp, &t3)) != MP_OKAY)                              { goto _ERR; }
 
-       /* (u1,u2,u3) = (v1,v2,v3) */
-       if ((err = mp_copy(&v1, &u1)) != MP_OKAY)                                  { goto _ERR; }
-       if ((err = mp_copy(&v2, &u2)) != MP_OKAY)                                  { goto _ERR; }
-       if ((err = mp_copy(&v3, &u3)) != MP_OKAY)                                  { goto _ERR; }
+      /* (u1,u2,u3) = (v1,v2,v3) */
+      if ((err = mp_copy(&v1, &u1)) != MP_OKAY)                                   { goto _ERR; }
+      if ((err = mp_copy(&v2, &u2)) != MP_OKAY)                                   { goto _ERR; }
+      if ((err = mp_copy(&v3, &u3)) != MP_OKAY)                                   { goto _ERR; }
 
-       /* (v1,v2,v3) = (t1,t2,t3) */
-       if ((err = mp_copy(&t1, &v1)) != MP_OKAY)                                  { goto _ERR; }
-       if ((err = mp_copy(&t2, &v2)) != MP_OKAY)                                  { goto _ERR; }
-       if ((err = mp_copy(&t3, &v3)) != MP_OKAY)                                  { goto _ERR; }
+      /* (v1,v2,v3) = (t1,t2,t3) */
+      if ((err = mp_copy(&t1, &v1)) != MP_OKAY)                                   { goto _ERR; }
+      if ((err = mp_copy(&t2, &v2)) != MP_OKAY)                                   { goto _ERR; }
+      if ((err = mp_copy(&t3, &v3)) != MP_OKAY)                                   { goto _ERR; }
    }
 
    /* make sure U3 >= 0 */
    if (u3.sign == MP_NEG) {
-       if ((err = mp_neg(&u1, &u1)) != MP_OKAY)                                   { goto _ERR; }
-       if ((err = mp_neg(&u2, &u2)) != MP_OKAY)                                   { goto _ERR; }
-       if ((err = mp_neg(&u3, &u3)) != MP_OKAY)                                   { goto _ERR; }
+      if ((err = mp_neg(&u1, &u1)) != MP_OKAY)                                    { goto _ERR; }
+      if ((err = mp_neg(&u2, &u2)) != MP_OKAY)                                    { goto _ERR; }
+      if ((err = mp_neg(&u3, &u3)) != MP_OKAY)                                    { goto _ERR; }
    }
 
    /* copy result out */

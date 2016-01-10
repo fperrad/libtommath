@@ -102,7 +102,7 @@ int fast_mp_montgomery_reduce(mp_int *x, mp_int *n, mp_digit rho)
 
       /* inner loop */
       for (iy = 0; iy < n->used; iy++) {
-          *_W++ += (mp_word)mu * (mp_word)*tmpn++;
+        *_W++ += (mp_word)mu * (mp_word)*tmpn++;
       }
     }
 

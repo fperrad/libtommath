@@ -22,9 +22,9 @@ int mp_read_unsigned_bin(mp_int *a, const unsigned char *b, int c)
 
   /* make sure there are at least two digits */
   if (a->alloc < 2) {
-     if ((res = mp_grow(a, 2)) != MP_OKAY) {
-        return res;
-     }
+    if ((res = mp_grow(a, 2)) != MP_OKAY) {
+      return res;
+    }
   }
 
   /* zero the int */

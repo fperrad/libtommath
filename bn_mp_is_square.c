@@ -17,24 +17,24 @@
 
 /* Check if remainders are possible squares - fast exclude non-squares */
 static const char rem_128[128] = {
- 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
- 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
- 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
- 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
- 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
- 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
- 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
- 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1
+  0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
+  0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
+  1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
+  1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
+  0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
+  1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
+  1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
+  1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1
 };
 
 static const char rem_105[105] = {
- 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1,
- 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1,
- 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1,
- 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1,
- 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1,
- 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1,
- 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1
+  0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1,
+  0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1,
+  0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1,
+  1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1,
+  0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1,
+  1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1,
+  1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1
 };
 
 /* Store non-zero to ret if arg is square, and zero if not */
@@ -54,28 +54,28 @@ int mp_is_square(mp_int *arg, int *ret)
 
   /* digits used?  (TSD) */
   if (arg->used == 0) {
-     return MP_OKAY;
+    return MP_OKAY;
   }
 
   /* First check mod 128 (suppose that DIGIT_BIT is at least 7) */
   if (rem_128[127u & DIGIT(arg, 0)] == (char)1) {
-     return MP_OKAY;
+    return MP_OKAY;
   }
 
   /* Next check mod 105 (3*5*7) */
   if ((res = mp_mod_d(arg, (mp_digit)105, &c)) != MP_OKAY) {
-     return res;
+    return res;
   }
   if (rem_105[c] == (char)1) {
-     return MP_OKAY;
+    return MP_OKAY;
   }
 
 
   if ((res = mp_init_set_int(&t, 11L*13L*17L*19L*23L*29L*31L)) != MP_OKAY) {
-     return res;
+    return res;
   }
   if ((res = mp_mod(arg, &t, &t)) != MP_OKAY) {
-     goto ERR;
+    goto ERR;
   }
   r = mp_get_int(&t);
   /* Check for other prime modules, note it's not an ERROR but we must
@@ -92,10 +92,10 @@ int mp_is_square(mp_int *arg, int *ret)
 
   /* Final check - is sqr(sqrt(arg)) == arg ? */
   if ((res = mp_sqrt(arg, &t)) != MP_OKAY) {
-     goto ERR;
+    goto ERR;
   }
   if ((res = mp_sqr(&t, &t)) != MP_OKAY) {
-     goto ERR;
+    goto ERR;
   }
 
   *ret = (mp_cmp_mag(&t, arg) == MP_EQ) ? MP_YES : MP_NO;

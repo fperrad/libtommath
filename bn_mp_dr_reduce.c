@@ -45,9 +45,9 @@ int mp_dr_reduce(mp_int *x, mp_int *n, mp_digit k)
     }
   }
 
-/* top of loop, this is where the code resumes if
- * another reduction pass is required.
- */
+  /* top of loop, this is where the code resumes if
+   * another reduction pass is required.
+   */
 top:
   /* aliases for digits */
   /* alias for lower half of x */
@@ -61,9 +61,9 @@ top:
 
   /* compute (x mod B**m) + k * [x/B**m] inline and inplace */
   for (i = 0; i < m; i++) {
-      r         = ((mp_word)*tmpx2++ * (mp_word)k) + *tmpx1 + mu;
-      *tmpx1++  = (mp_digit)(r & MP_MASK);
-      mu        = (mp_digit)(r >> ((mp_word)DIGIT_BIT));
+    r         = ((mp_word)*tmpx2++ * (mp_word)k) + *tmpx1 + mu;
+    *tmpx1++  = (mp_digit)(r & MP_MASK);
+    mu        = (mp_digit)(r >> ((mp_word)DIGIT_BIT));
   }
 
   /* set final carry */
@@ -71,7 +71,7 @@ top:
 
   /* zero words above m */
   for (i = m + 1; i < x->used; i++) {
-      *tmpx1++ = 0;
+    *tmpx1++ = 0;
   }
 
   /* clamp, sub and return */

@@ -33,17 +33,17 @@ int mp_lcm(mp_int *a, mp_int *b, mp_int *c)
 
   /* divide the smallest by the GCD */
   if (mp_cmp_mag(a, b) == MP_LT) {
-     /* store quotient in t2 such that t2 * b is the LCM */
-     if ((res = mp_div(a, &t1, &t2, NULL)) != MP_OKAY) {
-        goto LBL_T;
-     }
-     res = mp_mul(b, &t2, c);
+    /* store quotient in t2 such that t2 * b is the LCM */
+    if ((res = mp_div(a, &t1, &t2, NULL)) != MP_OKAY) {
+      goto LBL_T;
+    }
+    res = mp_mul(b, &t2, c);
   } else {
-     /* store quotient in t2 such that t2 * a is the LCM */
-     if ((res = mp_div(b, &t1, &t2, NULL)) != MP_OKAY) {
-        goto LBL_T;
-     }
-     res = mp_mul(a, &t2, c);
+    /* store quotient in t2 such that t2 * a is the LCM */
+    if ((res = mp_div(b, &t1, &t2, NULL)) != MP_OKAY) {
+      goto LBL_T;
+    }
+    res = mp_mul(a, &t2, c);
   }
 
   /* fix the sign to positive */

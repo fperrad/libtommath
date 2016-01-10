@@ -33,7 +33,7 @@ int mp_prime_fermat(mp_int *a, mp_int *b, int *result)
 
   /* ensure b > 1 */
   if (mp_cmp_d(b, (mp_digit)1) != MP_GT) {
-     return MP_VAL;
+    return MP_VAL;
   }
 
   /* init t */

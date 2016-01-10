@@ -22,7 +22,7 @@ unsigned long long mp_get_long_long(mp_int *a)
   unsigned long long res;
 
   if (a->used == 0) {
-     return 0;
+    return 0;
   }
 
   /* get number of digits of the lsb we have to read */
