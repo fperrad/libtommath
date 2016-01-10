@@ -18,12 +18,12 @@
 /* creates "a" then copies b into it */
 int mp_init_copy(mp_int *a, mp_int *b)
 {
-  int     res;
+   int     res;
 
-  if ((res = mp_init_size(a, b->used)) != MP_OKAY) {
-    return res;
-  }
-  return mp_copy(b, a);
+   if ((res = mp_init_size(a, b->used)) != MP_OKAY) {
+      return res;
+   }
+   return mp_copy(b, a);
 }
 #endif
 
