@@ -44,7 +44,7 @@ int mp_prime_is_prime (mp_int * a, int t, int *result)
   }
 
   /* first perform trial division */
-  if ((err = mp_prime_is_divisible (a, &res)) != MP_OKAY) {
+  if ((err = mp_prime_is_divisible(a, &res)) != MP_OKAY) {
     return err;
   }
 

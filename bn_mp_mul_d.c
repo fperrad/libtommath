@@ -25,7 +25,7 @@ mp_mul_d (mp_int * a, mp_digit b, mp_int * c)
 
   /* make sure c is big enough to hold a*b */
   if (c->alloc < (a->used + 1)) {
-    if ((res = mp_grow (c, a->used + 1)) != MP_OKAY) {
+    if ((res = mp_grow(c, a->used + 1)) != MP_OKAY) {
       return res;
     }
   }

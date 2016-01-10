@@ -23,18 +23,18 @@ mp_mod_2d (mp_int * a, int b, mp_int * c)
 
   /* if b is <= 0 then zero the int */
   if (b <= 0) {
-    mp_zero (c);
+    mp_zero(c);
     return MP_OKAY;
   }
 
   /* if the modulus is larger than the value than return */
   if (b >= (a->used * DIGIT_BIT)) {
-    res = mp_copy (a, c);
+    res = mp_copy(a, c);
     return res;
   }
 
   /* copy */
-  if ((res = mp_copy (a, c)) != MP_OKAY) {
+  if ((res = mp_copy(a, c)) != MP_OKAY) {
     return res;
   }
 
@@ -45,7 +45,7 @@ mp_mod_2d (mp_int * a, int b, mp_int * c)
   /* clear the digit that is not completely outside/inside the modulus */
   c->dp[b / DIGIT_BIT] &=
     ((mp_digit)1 << ((mp_digit)b % (mp_digit)DIGIT_BIT)) - (mp_digit)1;
-  mp_clamp (c);
+  mp_clamp(c);
   return MP_OKAY;
 }
 #endif

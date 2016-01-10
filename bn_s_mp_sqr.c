@@ -24,7 +24,7 @@ int s_mp_sqr (mp_int * a, mp_int * b)
   mp_digit u, tmpx, *tmpt;
 
   pa = a->used;
-  if ((res = mp_init_size (&t, (2 * pa) + 1)) != MP_OKAY) {
+  if ((res = mp_init_size(&t, (2 * pa) + 1)) != MP_OKAY) {
     return res;
   }
 
@@ -72,9 +72,9 @@ int s_mp_sqr (mp_int * a, mp_int * b)
     }
   }
 
-  mp_clamp (&t);
-  mp_exch (&t, b);
-  mp_clear (&t);
+  mp_clamp(&t);
+  mp_exch(&t, b);
+  mp_clear(&t);
   return MP_OKAY;
 }
 #endif

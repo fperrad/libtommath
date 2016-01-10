@@ -32,16 +32,16 @@ mp_rand (mp_int * a, int digits)
     d = (mp_digit)abs(MP_GEN_RANDOM()) & MP_MASK;
   } while (d == 0u);
 
-  if ((res = mp_add_d (a, d, a)) != MP_OKAY) {
+  if ((res = mp_add_d(a, d, a)) != MP_OKAY) {
     return res;
   }
 
   while (--digits > 0) {
-    if ((res = mp_lshd (a, 1)) != MP_OKAY) {
+    if ((res = mp_lshd(a, 1)) != MP_OKAY) {
       return res;
     }
 
-    if ((res = mp_add_d (a, (mp_digit)abs(MP_GEN_RANDOM()), a)) != MP_OKAY) {
+    if ((res = mp_add_d(a, (mp_digit)abs(MP_GEN_RANDOM()), a)) != MP_OKAY) {
       return res;
     }
   }

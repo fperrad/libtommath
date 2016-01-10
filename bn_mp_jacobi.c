@@ -32,9 +32,9 @@ int mp_jacobi (mp_int * a, mp_int * n, int *c)
   }
 
   /* step 1. handle case of a == 0 */
-  if (mp_iszero (a) == MP_YES) {
+  if (mp_iszero(a) == MP_YES) {
      /* special case of a == 0 and n == 1 */
-     if (mp_cmp_d (n, (mp_digit)1) == MP_EQ) {
+     if (mp_cmp_d(n, (mp_digit)1) == MP_EQ) {
        *c = 1;
      } else {
        *c = 0;
@@ -43,7 +43,7 @@ int mp_jacobi (mp_int * a, mp_int * n, int *c)
   }
 
   /* step 2.  if a == 1, return 1 */
-  if (mp_cmp_d (a, (mp_digit)1) == MP_EQ) {
+  if (mp_cmp_d(a, (mp_digit)1) == MP_EQ) {
     *c = 1;
     return MP_OKAY;
   }
@@ -52,11 +52,11 @@ int mp_jacobi (mp_int * a, mp_int * n, int *c)
   s = 0;
 
   /* step 3.  write a = a1 * 2**k  */
-  if ((res = mp_init_copy (&a1, a)) != MP_OKAY) {
+  if ((res = mp_init_copy(&a1, a)) != MP_OKAY) {
     return res;
   }
 
-  if ((res = mp_init (&p1)) != MP_OKAY) {
+  if ((res = mp_init(&p1)) != MP_OKAY) {
     goto LBL_A1;
   }
 
@@ -86,14 +86,14 @@ int mp_jacobi (mp_int * a, mp_int * n, int *c)
   }
 
   /* if a1 == 1 we're done */
-  if (mp_cmp_d (&a1, (mp_digit)1) == MP_EQ) {
+  if (mp_cmp_d(&a1, (mp_digit)1) == MP_EQ) {
     *c = s;
   } else {
     /* n1 = n mod a1 */
-    if ((res = mp_mod (n, &a1, &p1)) != MP_OKAY) {
+    if ((res = mp_mod(n, &a1, &p1)) != MP_OKAY) {
       goto LBL_P1;
     }
-    if ((res = mp_jacobi (&p1, &a1, &r)) != MP_OKAY) {
+    if ((res = mp_jacobi(&p1, &a1, &r)) != MP_OKAY) {
       goto LBL_P1;
     }
     *c = s * r;
@@ -101,8 +101,8 @@ int mp_jacobi (mp_int * a, mp_int * n, int *c)
 
   /* done */
   res = MP_OKAY;
-LBL_P1:mp_clear (&p1);
-LBL_A1:mp_clear (&a1);
+LBL_P1:mp_clear(&p1);
+LBL_A1:mp_clear(&a1);
   return res;
 }
 #endif
