@@ -44,16 +44,16 @@ int mp_fread(mp_int *a, int radix, FILE *stream)
       }
       
       /* shift up and add */
-      if ((err = mp_mul_d(a, radix, a)) != MP_OKAY) {
+      if ((err = mp_mul_d(a, (mp_digit)radix, a)) != MP_OKAY) {
          return err;
       }
-      if ((err = mp_add_d(a, y, a)) != MP_OKAY) {
+      if ((err = mp_add_d(a, (mp_digit)y, a)) != MP_OKAY) {
          return err;
       }
       
       ch = fgetc(stream);
    }
-   if (mp_cmp_d(a, 0) != MP_EQ) {
+   if (mp_cmp_d(a, (mp_digit)0) != MP_EQ) {
       a->sign = neg;
    }
    

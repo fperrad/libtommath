@@ -28,11 +28,11 @@ int mp_exteuclid(mp_int *a, mp_int *b, mp_int *U1, mp_int *U2, mp_int *U3)
    }
 
    /* initialize, (u1,u2,u3) = (1,0,a) */
-   mp_set(&u1, 1);
+   mp_set(&u1, (mp_digit)1);
    if ((err = mp_copy(a, &u3)) != MP_OKAY)                                        { goto _ERR; }
 
    /* initialize, (v1,v2,v3) = (0,1,b) */
-   mp_set(&v2, 1);
+   mp_set(&v2, (mp_digit)1);
    if ((err = mp_copy(b, &v3)) != MP_OKAY)                                        { goto _ERR; }
 
    /* loop while v3 != 0 */

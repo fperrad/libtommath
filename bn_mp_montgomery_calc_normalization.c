@@ -33,7 +33,7 @@ int mp_montgomery_calc_normalization (mp_int * a, mp_int * b)
         return res;
      }
   } else {
-     mp_set(a, 1);
+     mp_set(a, (mp_digit)1);
      bits = 1;
   }
 

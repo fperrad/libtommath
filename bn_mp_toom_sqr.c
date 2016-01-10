@@ -163,7 +163,7 @@ mp_toom_sqr(mp_int *a, mp_int *b)
        goto ERR;
     }
     /* 3r2 - r1 - r3 */
-    if ((res = mp_mul_d(&w2, 3, &w2)) != MP_OKAY) {
+    if ((res = mp_mul_d(&w2, (mp_digit)3, &w2)) != MP_OKAY) {
        goto ERR;
     }
     if ((res = mp_sub(&w2, &w1, &w2)) != MP_OKAY) {

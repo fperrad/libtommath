@@ -27,14 +27,14 @@ int mp_jacobi (mp_int * a, mp_int * n, int *c)
   mp_digit residue;
 
   /* if n <= 0 return MP_VAL */
-  if (mp_cmp_d(n, 0) != MP_GT) {
+  if (mp_cmp_d(n, (mp_digit)0) != MP_GT) {
      return MP_VAL;
   }
 
   /* step 1. handle case of a == 0 */
   if (mp_iszero (a) == MP_YES) {
      /* special case of a == 0 and n == 1 */
-     if (mp_cmp_d (n, 1) == MP_EQ) {
+     if (mp_cmp_d (n, (mp_digit)1) == MP_EQ) {
        *c = 1;
      } else {
        *c = 0;
@@ -43,7 +43,7 @@ int mp_jacobi (mp_int * a, mp_int * n, int *c)
   }
 
   /* step 2.  if a == 1, return 1 */
-  if (mp_cmp_d (a, 1) == MP_EQ) {
+  if (mp_cmp_d (a, (mp_digit)1) == MP_EQ) {
     *c = 1;
     return MP_OKAY;
   }
@@ -86,7 +86,7 @@ int mp_jacobi (mp_int * a, mp_int * n, int *c)
   }
 
   /* if a1 == 1 we're done */
-  if (mp_cmp_d (&a1, 1) == MP_EQ) {
+  if (mp_cmp_d (&a1, (mp_digit)1) == MP_EQ) {
     *c = s;
   } else {
     /* n1 = n mod a1 */

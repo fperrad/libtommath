@@ -160,7 +160,7 @@ int mp_exptmod_fast (mp_int * G, mp_int * X, mp_int * P, mp_int * Y, int redmode
        goto LBL_RES;
      }
   } else {
-     mp_set(&res, 1);
+     mp_set(&res, (mp_digit)1);
      if ((err = mp_mod(G, P, &M[1])) != MP_OKAY) {
         goto LBL_RES;
      }

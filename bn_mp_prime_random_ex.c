@@ -96,7 +96,7 @@ int mp_prime_random_ex(mp_int *a, int t, int size, int flags, ltm_prime_callback
 
       if ((flags & LTM_PRIME_SAFE) != 0) {
          /* see if (a-1)/2 is prime */
-         if ((err = mp_sub_d(a, 1, a)) != MP_OKAY)                    { goto error; }
+         if ((err = mp_sub_d(a, (mp_digit)1, a)) != MP_OKAY)          { goto error; }
          if ((err = mp_div_2(a, a)) != MP_OKAY)                       { goto error; }
  
          /* is it prime? */
@@ -107,7 +107,7 @@ int mp_prime_random_ex(mp_int *a, int t, int size, int flags, ltm_prime_callback
    if ((flags & LTM_PRIME_SAFE) != 0) {
       /* restore a to the original value */
       if ((err = mp_mul_2(a, a)) != MP_OKAY)                          { goto error; }
-      if ((err = mp_add_d(a, 1, a)) != MP_OKAY)                       { goto error; }
+      if ((err = mp_add_d(a, (mp_digit)1, a)) != MP_OKAY)             { goto error; }
    }
 
    err = MP_OKAY;

@@ -133,7 +133,7 @@ int s_mp_exptmod (mp_int * G, mp_int * X, mp_int * P, mp_int * Y, int redmode)
   if ((err = mp_init (&res)) != MP_OKAY) {
     goto LBL_MU;
   }
-  mp_set (&res, 1);
+  mp_set (&res, (mp_digit)1);
 
   /* set initial mode and bit cnt */
   mode   = 0;
