@@ -24,7 +24,7 @@ int mp_fwrite(mp_int *a, int radix, FILE *stream)
       return err;
    }
 
-   buf = OPT_CAST(char) XMALLOC (len);
+   buf = OPT_CAST(char) XMALLOC ((size_t)len);
    if (buf == NULL) {
       return MP_MEM;
    }
@@ -35,7 +35,7 @@ int mp_fwrite(mp_int *a, int radix, FILE *stream)
    }
    
    for (x = 0; x < len; x++) {
-       if (fputc(buf[x], stream) == EOF) {
+       if (fputc((int)buf[x], stream) == EOF) {
           XFREE (buf);
           return MP_VAL;
        }

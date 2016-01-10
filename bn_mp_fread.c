@@ -25,7 +25,7 @@ int mp_fread(mp_int *a, int radix, FILE *stream)
    
    /* if first digit is - then set negative */
    ch = fgetc(stream);
-   if (ch == '-') {
+   if (ch == (int)'-') {
       neg = MP_NEG;
       ch = fgetc(stream);
    } else {
@@ -35,7 +35,7 @@ int mp_fread(mp_int *a, int radix, FILE *stream)
    for (;;) {
       /* find y in the radix map */
       for (y = 0; y < radix; y++) {
-          if (mp_s_rmap[y] == ch) {
+          if (mp_s_rmap[y] == (char)ch) {
              break;
           }
       }

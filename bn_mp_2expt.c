@@ -37,7 +37,7 @@ mp_2expt (mp_int * a, int b)
   a->used = (b / DIGIT_BIT) + 1;
 
   /* put the single bit in its place */
-  a->dp[b / DIGIT_BIT] = ((mp_digit)1) << (b % DIGIT_BIT);
+  a->dp[b / DIGIT_BIT] = (mp_digit)1 << ((mp_digit)b % (mp_digit)DIGIT_BIT);
 
   return MP_OKAY;
 }
