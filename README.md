@@ -6,9 +6,9 @@ This is the git repository for [LibTomMath](http://www.libtom.net/LibTomMath/), 
 
 ### Travis CI
 
-master: [![Build Status](https://api.travis-ci.org/libtom/libtommath.png?branch=master)](https://travis-ci.org/libtom/libtommath)
+master: [![Build Status](https://api.travis-ci.org/fperrad/libtommath.png?branch=master)](https://travis-ci.org/fperrad/libtommath)
 
-develop: [![Build Status](https://api.travis-ci.org/libtom/libtommath.png?branch=develop)](https://travis-ci.org/libtom/libtommath)
+develop: [![Build Status](https://api.travis-ci.org/fperrad/libtommath.png?branch=develop)](https://travis-ci.org/fperrad/libtommath)
 
 ### AppVeyor
 

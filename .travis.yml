@@ -203,11 +203,6 @@ matrix:
     - env: SANITIZER=1 BUILDOPTIONS='--with-cc=clang --cflags=-DMP_16BIT --with-travis-valgrind'
     - env: SANITIZER=1 BUILDOPTIONS='--with-cc=clang --cflags=-DMP_32BIT --with-travis-valgrind'
 
-# Notifications go to
-# An email address is also possible.
-notifications:
-  irc: "chat.freenode.net#libtom-notifications"
-
 # The actual script the jobs run.
 # Because of a default timeout of 10 minutes it was necessary to use
 # a Travis tool to extend that timeout to 40 minutes. 50 minutes
